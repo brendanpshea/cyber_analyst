@@ -540,7 +540,209 @@
 			\item SSO implementations typically use protocols like SAML, OAuth, or OpenID Connect to securely share authentication information.
 			\item While SSO creates a single point of entry, it should be strengthened with MFA and continuous monitoring to mitigate this risk.
 		\end{itemize}
-		
 =
 		\end{frame}
+		
+		\begin{frame}
+			\frametitle{25. Privileged Access Management: Protecting Your Keys to the Kingdom}
+			\begin{itemize}
+				\item \textbf{Privileged Access Management (PAM)} focuses on securing, controlling, and monitoring access to high-value accounts and resources.
+				\item Privileged accounts, such as admin accounts, have elevated permissions that can cause significant damage if compromised.
+				\item PAM implements principles like just-in-time access, privilege elevation, credential vaulting, and session monitoring.
+				\item Effective PAM strategies include role-based access control, session recording, and privileged account analytics.
+			\end{itemize}
+			
+			\begin{block}{Key PAM Capabilities}
+				\scriptsize
+				\begin{itemize}
+					\item Password vaulting and rotation for privileged credentials
+					\item Just-in-time privileged access with automated approval workflows
+					\item Session monitoring and recording for audit and forensic purposes
+					\item Privileged account discovery and continuous monitoring for anomalies
+				\end{itemize}
+			\end{block}
+		\end{frame}
+		
+		\begin{frame}
+			\frametitle{26. Passwordless Authentication: Beyond the Password Paradigm}
+			\begin{itemize}
+				\item \textbf{Passwordless authentication} eliminates passwords in favor of more secure factors like biometrics and hardware tokens.
+				\item This approach addresses fundamental password problems including reuse, theft, phishing vulnerability, and user friction.
+				\item Implementation options include biometrics, hardware security keys, mobile authenticator apps, and email magic links.
+				\item Passwordless solutions often rely on public-key cryptography where private keys remain securely on user devices.
+			\end{itemize}
+	\begin{columns}
+		\scriptsize
+		\begin{column}{0.48\textwidth}
+			\begin{block}{Traditional Password Model}
+				\begin{itemize}
+					\item User memorizes secret
+					\item Server stores password hash
+					\item Susceptible to phishing
+					\item Vulnerable to credential stuffing
+				\end{itemize}
+			\end{block}
+		\end{column}
+		\begin{column}{0.48\textwidth}
+			\begin{block}{Passwordless Model}
+				\begin{itemize}
+					\item Device holds private key
+					\item Server verifies public key
+					\item Phishing resistant
+					\item Tied to specific device
+				\end{itemize}
+			\end{block}
+		\end{column}
+	\end{columns}
+		\end{frame}
+		
+		\begin{frame}
+			\frametitle{27. Cloud Access Security Brokers: Visibility and Control in the Cloud}
+			\begin{itemize}
+				\item \textbf{Cloud Access Security Brokers (CASBs)} are security enforcement points between cloud service consumers and providers.
+				\item CASBs provide visibility into cloud application usage, data protection, compliance enforcement, and threat protection.
+				\item Key functions include discovery of shadow IT, data loss prevention, access control, and encryption of sensitive information.
+				\item CASBs can be deployed in forward proxy, reverse proxy, or API-based modes depending on requirements.
+			\end{itemize}
+			
+			\begin{alertblock}{Shadow IT Risks}
+				\scriptsize
+				Shadow IT—unauthorized cloud services used without IT approval—can expose sensitive data, violate compliance requirements, and create security blind spots. CASBs help discover and manage these previously invisible services to reduce organizational risk.
+			\end{alertblock}
+		\end{frame}
+		
+		\begin{frame}
+			\frametitle{28. Encryption: Data Protection at Rest and in Motion}
+			\begin{itemize}
+				\item \textbf{Encryption} transforms readable data (plaintext) into encoded form (ciphertext) that can only be decoded with the proper key.
+				\item Data encryption protects information at rest (stored data), in transit (moving across networks), and in use (being processed).
+				\item Symmetric encryption uses the same key for encryption and decryption, while asymmetric encryption uses public-private key pairs.
+				\item Key management—the secure generation, storage, distribution, and rotation of encryption keys—is critical to encryption effectiveness.
+			\end{itemize}
+			
+			\begin{table}
+				\scriptsize
+				\begin{tabular}{|l|l|l|}
+					\hline
+					\textbf{State} & \textbf{Protection Method} & \textbf{Examples} \\
+					\hline
+					Data at Rest & Full disk encryption & BitLocker, FileVault \\
+					\cline{2-3}
+					& Database encryption & TDE, column encryption \\
+					\hline
+					Data in Transit & Network protocols & TLS, IPsec, SSH \\
+					\cline{2-3}
+					& VPN technologies & SSL VPN, site-to-site VPN \\
+					\hline
+					Data in Use & Memory encryption & Secure enclaves, TEEs \\
+					\cline{2-3}
+					& Homomorphic encryption & Processing encrypted data \\
+					\hline
+				\end{tabular}
+			\end{table}
+		\end{frame}
+		
+		\begin{frame}
+			\frametitle{29. Public Key Infrastructure: The Trust Framework of the Internet}
+			\begin{itemize}
+				\item \textbf{Public Key Infrastructure (PKI)} is a system of digital certificates, certificate authorities, and other components that enable secure communications.
+				\item PKI establishes trust by validating the authenticity of entities through digital certificates and cryptographic keys.
+				\item Core components include Certificate Authorities (CAs), Registration Authorities (RAs), certificate databases, and certificate revocation mechanisms.
+				\item PKI enables secure websites (HTTPS), email encryption, digital signatures, and secure code signing.
+			\end{itemize}
+			
+	\begin{tikzpicture}[
+		scale=0.8, transform shape,
+		box/.style={rectangle, draw, minimum width=2.5cm, minimum height=0.8cm, align=center},
+		level distance=1.2cm,
+		level 1/.style={sibling distance=6cm},
+		level 2/.style={sibling distance=3cm}]
+		
+		% Tree structure using forest package approach but with standard TikZ
+		\node[box] {Root CA}
+		child { node[box] {Intermediate CA 1}
+			child { node[box] {Leaf Cert} }
+			child { node[box] {Leaf Cert} }
+		}
+		child { node[box] {Intermediate CA 2}
+			child { node[box] {Leaf Cert} }
+			child { node[box] {Leaf Cert} }
+		};
+		
+		% Title at the bottom
+		\node[red, align=center] at (0,-4.5) {Certificate Chain of Trust};
+	\end{tikzpicture}
+		\end{frame}
+		
+		\begin{frame}
+			\frametitle{30. SSL Inspection: Balancing Privacy and Security}
+			\begin{itemize}
+				\item \textbf{SSL/TLS inspection} is the process of decrypting encrypted traffic for security analysis and then re-encrypting it before delivery.
+				\item While HTTPS encryption protects data in transit, it can also hide malicious content from security tools.
+				\item SSL inspection enables content filtering, data loss prevention, and malware detection for encrypted traffic.
+				\item Implementation requires careful consideration of privacy, regulatory compliance, and potential performance impacts.
+			\end{itemize}
+			
+			\begin{example}{SSL Inspection Process}
+				\scriptsize
+				\begin{enumerate}
+					\item Client initiates HTTPS connection to a website
+					\item SSL inspection device intercepts the connection
+					\item Device establishes its own connection to the website
+					\item Traffic is decrypted, inspected for threats, and then re-encrypted
+					\item Requires installation of a trusted CA certificate on client devices
+				\end{enumerate}
+			\end{example}
+		\end{frame}
+		
+		\begin{frame}
+			\frametitle{31. Sensitive Data Protection: Classification and Controls}
+			\begin{itemize}
+				\item \textbf{Sensitive data protection} involves identifying, classifying, and securing high-value information throughout its lifecycle.
+				\item Data classification categorizes information based on sensitivity levels and regulatory requirements.
+				\item Protection strategies include access controls, encryption, data masking, and monitoring of data access patterns.
+				\item Data sovereignty and compliance requirements influence where and how sensitive data can be stored and processed.
+			\end{itemize}
+			
+			\begin{block}{Data Classification Levels}
+				\scriptsize
+				\begin{description}
+					\item[Public] Information that can be freely shared with no negative impact
+					\item[Internal] Business information intended for use within the organization
+					\item[Confidential] Sensitive information that could harm the organization if disclosed
+					\item[Restricted] Highly sensitive data requiring the strictest controls
+				\end{description}
+			\end{block}
+		\end{frame}
+		
+		\begin{frame}
+			\frametitle{32. Data Loss Prevention: Keeping Critical Information Inside Your Walls}
+			\begin{itemize}
+				\item \textbf{Data Loss Prevention (DLP)} systems identify, monitor, and protect sensitive data from unauthorized access or exfiltration.
+				\item DLP solutions analyze content at rest, in motion, and in use to enforce security policies.
+				\item Implementation requires defining sensitive data patterns, creating policies, and determining appropriate actions for violations.
+				\item DLP technologies use techniques like regular expressions, fingerprinting, and machine learning to identify sensitive content.
+			\end{itemize}
+			
+			\begin{tikzpicture}[scale = .7]
+				\draw (0,0) rectangle (10,5);
+				\draw (5,0) -- (5,5);
+				\draw (0,2.5) -- (10,2.5);
+				
+				\node at (2.5,4) {Data at Rest};
+				\node at (2.5,3) {File shares, databases, endpoints};
+				
+				\node at (7.5,4) {Data in Motion};
+				\node at (7.5,3) {Email, web, network traffic};
+				
+				\node at (2.5,1.5) {Data in Use};
+				\node at (2.5,0.5) {Applications, clipboard, printing};
+				
+				\node at (7.5,1.5) {DLP Actions};
+				\node at (7.5,0.5) {Block, encrypt, alert, log};
+				
+				\node[red, anchor=north] at (5,5.5) {DLP Coverage Areas};
+			\end{tikzpicture}
+		\end{frame}
+
 \end{document}
